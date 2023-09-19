@@ -59,4 +59,7 @@ El trabajo de un administrador de sistemas puede verse claramente simplificando 
     ``` 
 
 - En el servidor, entraremos en el archivo /var/log para saber si se ha guardado la máquina virtual
-- ![Imagen_logger](imagen_logger.png)
+    ```bash
+    $ cat /var/log/jorge-virtualbox/Logger.log |grep prueba
+    2023-09-12T14:41:26+02:00 jorge-virtualbox jorge:prueba
+    ```
