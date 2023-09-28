@@ -43,7 +43,6 @@
          minlen = 12
         dcredit = 3 #Crédito máximo por dígito en la nueva cuenta
         <esc> :wq #Guardar la configuración
-
     ```
 ### 3. Finalización / Verificación
 
@@ -104,5 +103,4 @@
     $ pwscore
         HOLAa12334278
         31
-
     ```
