@@ -156,6 +156,7 @@ default:other::---
 ## Finalización / Verificación
 
 - S1 no puede leer eso2
+  
 ```bash
 $ root - echo "Prueba Lectura" > eso2/lectura.md
 $ root@daniel-virtualbox:/Compartido de grupos# su s1
