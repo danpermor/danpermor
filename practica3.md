@@ -184,5 +184,3 @@ $ cd /Compartido\ de\ grupos/Teachers/
 t2@daniel-virtualbox:/Compartido de grupos/Teachers$ touch hola
 touch: no se puede efectuar `touch' sobre 'hola': Permiso denegado
 ```
-
-#
