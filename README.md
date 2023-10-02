@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 ## Unidad 1
 ### [1. Práctica - Configuación Logs centralizados](practica1.md)
 ### [2. Práctica - Gestión de políticas de contraseñas](practica2.md)
-### [3. Práctica - ](practica3.md)
+### [3. Práctica - Configuración permisos ACL](practica3.md)
 ### [4. Práctica - ](practica4.md)
 ### [5. Práctica - ](practica5.md)
 ### [6. Práctica - ](practica6.md)
