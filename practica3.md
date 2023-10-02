@@ -66,7 +66,9 @@ adduser s3
 ```
 
 - Una vez creados los grupos y usuarios comenzamos con los permisos:
+  
 ```bash
+$ vim creacionejercicio.sh
 #!/bin/bash
 setfacl -Rb *
 setfacl -Rdm u:t1:rw,g:teachers:r Teachers
@@ -78,6 +80,9 @@ setfacl -Rm u:t1:rw,g:teachers:r Teachers
 setfacl -Rm g:teachers:rwX,g:eso1:rX eso1
 setfacl -Rm g:teachers:rwX,g:eso2:rX eso2
 setfacl -Rm g:students:rX,g:teachers:rw students
+$ :wq
+$ chmod +x creacionejercicio.sh
+$ sudo bash creacionejercicio.sh
 ```
 - Los permisos quedarían así:
 ```bash
