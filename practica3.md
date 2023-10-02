@@ -79,7 +79,73 @@ setfacl -Rm g:teachers:rwX,g:eso1:rX eso1
 setfacl -Rm g:teachers:rwX,g:eso2:rX eso2
 setfacl -Rm g:students:rX,g:teachers:rw students
 ```
+- Los permisos quedarían así:
+```bash
+$ getfacl *
+# file: eso1
+# owner: root
+# group: eso1
+user::rwx
+group::r-x
+group:teachers:rwx
+group:eso1:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::r-x
+default:group:teachers:rwx
+default:group:eso1:r-x
+default:mask::rwx
+default:other::---
 
+# file: eso2
+# owner: root
+# group: eso2
+user::rwx
+group::r-x
+group:teachers:rwx
+group:eso2:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::r-x
+default:group:teachers:rwx
+default:group:eso2:r-x
+default:mask::rwx
+default:other::---
+
+# file: students
+# owner: root
+# group: students
+user::rwx
+group::r-x
+group:teachers:rw-
+group:students:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::r-x
+default:group:teachers:rwx
+default:group:students:r-x
+default:mask::rwx
+default:other::---
+
+# file: Teachers
+# owner: root
+# group: teachers
+user::rwx
+user:t1:rw-
+group::r-x
+group:teachers:r--
+mask::rwx
+other::---
+default:user::rwx
+default:user:t1:rw-
+default:group::r-x
+default:group:teachers:r--
+default:mask::rwx
+default:other::---
+```
 ## Finalización / Verificación
 
 - S1 no puede leer eso2
@@ -108,3 +174,5 @@ $ cd /Compartido\ de\ grupos/Teachers/
 t2@daniel-virtualbox:/Compartido de grupos/Teachers$ touch hola
 touch: no se puede efectuar `touch' sobre 'hola': Permiso denegado
 ```
+
+#
