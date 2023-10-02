@@ -84,7 +84,9 @@ $ :wq
 $ chmod +x creacionejercicio.sh
 $ sudo bash creacionejercicio.sh
 ```
+
 - Los permisos quedarían así:
+
 ```bash
 $ getfacl *
 # file: eso1
@@ -162,6 +164,7 @@ bash: cd: eso2: Permiso denegado
 ```
 
 - Heredación de permisos en eso1/matematicas y creacion de carpeta de física
+  
 ```bash
 $ll
 drwxrwx---+ 4 root eso1 4096 oct  2 13:07 ./
@@ -173,6 +176,7 @@ $ pwd
 ```
 
 - t2 no escribe en teachers
+  
 ```bash
 $ su t2
 $ cd /Compartido\ de\ grupos/Teachers/
