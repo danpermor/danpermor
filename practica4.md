@@ -107,3 +107,8 @@ md5 -c checksum .txt
 volvemos a calcular el checksum con el echo
 mdadm /dev/md126 --fail mdadm /dev/sdb --remove
 ----
+
+lvm 
+    - Crear particion d 95% 
+    - Redimensionar a 60 40
+    - Gui que vea nuestro raid con particions o lsblk
