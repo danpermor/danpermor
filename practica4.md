@@ -91,14 +91,20 @@ $ vim /etc/fstab
         Tamaño de sector (lógico/físico): 512 bytes / 512 bytes
         Tamaño de E/S (mínimo/óptimo): 512 bytes / 512 bytes
 ```
+- Al reiniciar la máquina virtual vemos que han cambiado los nombres, por lo que tenemos que encontrar los raid0 de nuevo.
+```bash
+    $ mdadm --detail /dev/md125
+        Version : 1.2
+        Creation Time : Tue Oct 10 14:39:05 2023
+            Raid Level : raid0
+            Array Size : 4184064 (3.99 GiB 4.28 GB)
+        Raid Devices : 2
+        Total Devices : 2
+        Persistence : Superblock is persistent
+```
 
-
-- Los añadimos con virtualBox
+- Los añadimos con virtualBox   
 - Una vez creados, ponemos los hot spares
-
-
-
-----
 
 creamos con dd archivos, despues con md5 los miramos, eliminamos el disco metemos el otro y volvemos a mirar el hash
 md5sum p.txt > checksum.txt
@@ -107,7 +113,7 @@ md5 -c checksum .txt
 volvemos a calcular el checksum con el echo
 mdadm /dev/md126 --fail mdadm /dev/sdb --remove
 ----
-
+s
 lvm 
     - Crear particion d 95% 
     - Redimensionar a 60 40
