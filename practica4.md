@@ -128,7 +128,7 @@ $ md5sum archivo > signature.md5sum
 
 ```
 
-### 1. Mediante el mdadm, decimos que los discos estan fallando y los cambiamos por f y g.
+### 1. Mediante el mdadm, decimos que los discos estan fallando y los cambiamos por f y g
 
 ```bash
 $ mdadm --manage /dev/md1 --fail /dev/sdc
@@ -145,7 +145,7 @@ $ mdadm --manage /dev/md2 --add /dev/sdg
     mdadm: added /dev/sdg
 ```
 
-### 4. Por finalizar, volvemos a archivos_raid y comprobamos que todo haya salido bien.
+### 4. Por finalizar, volvemos a archivos_raid y comprobamos que todo haya salido bien
 
 ```bash
 $ md5sum archivo > signature2.md5sum
@@ -154,18 +154,18 @@ $ if [ "$(cat signature2.md5sum)" == "$(cat signature.md5sum)" ]; then  echo -e 
 ```
 
 ### 5. Finalmente desmontamos todo del fstab y desmontamos el md1 para comenzar a crear particiones dentro de él
-```bash
-$ shred /dev/md1
-$ umount /dev/md1
-    $ swapoff -a
-$ reboot
-```
 
+```bash
+shred /dev/md1
+umount /dev/md1
+    swapoff -a
+reboot
+```
 
 ## Creación de LVM
 
+### 1. Para este paso, primariamente creamos el disco "físico" /dev/md1
 
-### 1. Para este paso, primariamente creamos el disco "físico" /dev/md1 
 ```bash
 $ pvcreate /dev/md1
     WARNING: sun signature detected on /dev/md1 at offset 508. Wipe it? [y/n]: y
@@ -177,7 +177,8 @@ $ pvscan
 
 ```
 
-### 2. Comenzamos las particiones, creamos un grupo de volumen y la partición de 95% y finalmente lo formateamos.
+### 2. Comenzamos las particiones, creamos un grupo de volumen y la partición de 95% y finalmente lo formateamos
+
 ```bash
 $ vgcreate vgmd1 /dev/md1
     Volume group "vgmd1" successfully created
@@ -218,7 +219,8 @@ $ mkfs.ext4 /dev/vgmd1/part1
     Escribiendo superbloques y la información contable del sistema de archivos: hecho
 
 ```
-### 3. Este ejemplo no ha sido pedido, pero vamos a intentar ponerle más volúmen.
+
+### 3. Este ejemplo no ha sido pedido, pero vamos a intentar ponerle más volúmen
 
 ```bash
 $ df -h /dev/vgmd1/part1 
@@ -229,7 +231,6 @@ $ sudo lvextend -L +1900M /dev/vgmd1/part1
     Insufficient free space: 475 extents needed, but only 36 available
 
 ```
-
 
 ### 4. Como vemos que le hemos puesto demasiado, no podremos usarlo todo y con fines academicos, hacemos un resize a la partición de 95 debido al gran tamaño que usa, ahora usará de 60%
 
@@ -244,8 +245,11 @@ $ Do you really want to reduce vgmd1/part1? [y/n]: yes
 ```
 
 ## Comprobación
-    - Finalmente lo comprobamos instalando GParted y ver que todo está bien creado,
+
+- Finalmente lo comprobamos instalando GParted y ver que todo está bien creado,
+
 ```bash
-$ apt install gparted
+apt install gparted
 ```
+
 ![Gparted](Pocas_Capturas/gparted.png)
