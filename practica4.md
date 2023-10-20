@@ -91,17 +91,52 @@ $ vim /etc/fstab
         Tamaño de sector (lógico/físico): 512 bytes / 512 bytes
         Tamaño de E/S (mínimo/óptimo): 512 bytes / 512 bytes
 ```
-- Al reiniciar la máquina virtual vemos que han cambiado los nombres, por lo que tenemos que encontrar los raid0 de nuevo.
+
+- Al tener 2 discos extras vamos a hacer una pequeña comprobación, como vemos que en el disco md1 está sdc y en md2 sde, comprobaremos si al cambiar los discos "corruptos" cambiará la información o no.
+
+1. Comprobamos que no haya cambiado nada
 ```bash
-    $ mdadm --detail /dev/md125
-        Version : 1.2
-        Creation Time : Tue Oct 10 14:39:05 2023
-            Raid Level : raid0
-            Array Size : 4184064 (3.99 GiB 4.28 GB)
-        Raid Devices : 2
-        Total Devices : 2
-        Persistence : Superblock is persistent
+
+$ mdadm --detail /dev/md{1,2}
+    /dev/md1:
+
+        Number   Major   Minor   RaidDevice State
+        0       8       16        0      active sync   /dev/sdb
+        1       8       32        1      active sync   /dev/sdc
+    /dev/md2:
+
+        Number   Major   Minor   RaidDevice State
+        0       8       48        0      active sync   /dev/sdd
+        1       8       64        1      active sync   /dev/sde
 ```
+
+2. Ahora creamos un archivo en la carpeta "archivos_raid" de 500 mb y comprobamos con md5sum
+
+```bash
+$ cd /archivos_raid/
+$ sudo dd if=/dev/zero of=archivo bs=1M count=500
+    500+0 registros leídos
+    500+0 registros escritos
+    524288000 bytes (524 MB, 500 MiB) copied, 0,273997 s, 1,9 GB/s
+$ ls
+    archivo
+$ md5sum archivo 
+    d8b61b2c0025919d5321461045c8226f  archivo
+$ md5sum archivo > signature.md5sum 
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 - Los añadimos con virtualBox   
 - Una vez creados, ponemos los hot spares
@@ -113,7 +148,7 @@ md5 -c checksum .txt
 volvemos a calcular el checksum con el echo
 mdadm /dev/md126 --fail mdadm /dev/sdb --remove
 ----
-s
+
 lvm 
     - Crear particion d 95% 
     - Redimensionar a 60 40
