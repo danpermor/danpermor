@@ -251,5 +251,5 @@ $ Do you really want to reduce vgmd1/part1? [y/n]: yes
 ```bash
 apt install gparted
 ```
-
 ![Gparted](Pocas_Capturas/gparted.png)
+
