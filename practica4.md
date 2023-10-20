@@ -125,30 +125,38 @@ $ md5sum archivo
 $ md5sum archivo > signature.md5sum 
 
 ```
+3. Mediante el mdadm, decimos que los discos estan fallando y los cambiamos por f y g.
+
+
+```bash
+$ mdadm --manage /dev/md1 --fail /dev/sdc
+    mdadm: set /dev/sdc faulty in /dev/md1
+$ mdadm --manage /dev/md2 --fail /dev/sde
+    mdadm: set /dev/sde faulty in /dev/md2
+$ mdadm --manage /dev/md1 --remove /dev/sdc
+    mdadm: hot removed /dev/sdc from /dev/md1
+$ mdadm --manage /dev/md2 --remove /dev/sde
+    mdadm: hot removed /dev/sde from /dev/md2
+$ mdadm --manage /dev/md1 --add /dev/sdf
+    mdadm: added /dev/sdf
+$ mdadm --manage /dev/md2 --add /dev/sdg
+    mdadm: added /dev/sdg
+```
+
+4. Ahora volvemos a archivos_raid y comprobamos que todo haya salido bien.
+```bash
+$ md5sum archivo > signature2.md5sum
+$ if [ "$(cat signature2.md5sum)" == "$(cat signature.md5sum)" ]; then  echo -e "Todo bien"; else echo -e "algo ha fallado"; fi
+    Todo bien
+```
 
 
 
 
+### Creación de LVM
 
 
-
-
-
-
-
-
-
-- Los añadimos con virtualBox   
-- Una vez creados, ponemos los hot spares
-
-creamos con dd archivos, despues con md5 los miramos, eliminamos el disco metemos el otro y volvemos a mirar el hash
-md5sum p.txt > checksum.txt
-añadimos  echo "Lo q queramos " >> al archivo dd
-md5 -c checksum .txt
-volvemos a calcular el checksum con el echo
-mdadm /dev/md126 --fail mdadm /dev/sdb --remove
-----
-
+1. Primariamente creamos una partición de 95%
 lvm 
     - Crear particion d 95% 
     - Redimensionar a 60 40
