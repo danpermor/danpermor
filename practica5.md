@@ -32,17 +32,18 @@ $ openssl req -new -key apache2.key.pem -out solicitud.csr
   If you enter '.', the field will be left blank.
   -----
   Country Name (2 letter code) [AU]:ES
-  State or Province Name (full name) [Some-State]:España
+  State or Province Name (full name) [Some-State]:Spain
   Locality Name (eg, city) []:Valencia
-  Organization Name (eg, company) [Internet Widgits Pty Ltd]:DPM
-  Organizational Unit Name (eg, section) []:DP
+  Organization Name (eg, company) [Internet Widgits Pty Ltd]:Danieel
+  Organizational Unit Name (eg, section) []:DN
   Common Name (e.g. server FQDN or YOUR name) []:Daniel
-  Email Address []:danpermor5@alu.edu.gva.es
+  Email Address []:daniel@daniel.com
 
   Please enter the following 'extra' attributes
   to be sent with your certificate request
   A challenge password []:Daniel123
-  An optional company name []:daniel2
+  An optional company name []:danieel2
+
 
 ```
 
@@ -51,22 +52,24 @@ $ openssl req -new -key apache2.key.pem -out solicitud.csr
 ```bash
 $ openssl x509 -req -days 365 -in solicitud.csr -signkey apache2.key.pem -out certificadoapache2.crt
   Certificate request self-signature ok
-  subject=C = ES, ST = Espa\C3\83\C2\B1a, L = Valencia, O = DPM, OU = DP, CN = Daniel, emailAddress = danpermor5@alu.edu.gva.es
+  subject=C = ES, ST = Spain, L = Valencia, O = Danieel, OU = DN, CN = Daniel, emailAddress = daniel@daniel.com
+
 
 ```
 
-- Cabe destacar que la ruta es insegura y simplemente se ha usado para fines académicos, normalmente los certificados se guardan en /etc/ssl/certs y las claves en /etc/ssl/private/keys.
-    - - Finalmente, una vez teniendo todo creado añadiremos lo siguiente a /etc/apache2/sites-avaliable/default-ssl.conf y modificaremos las siguientes líneas, si quisieramos crear otro default-site, sería diferente para otro root directory, habría que crear otro archivo de default-sites...
+- Finalmente, una vez teniendo todo creado añadiremos lo siguiente a /etc/apache2/sites-avaliable/default-ssl.conf y modificaremos las siguientes líneas, si quisieramos crear otro default-site, sería diferente para otro root directory, habría que crear otro archivo de default-sites...
 
 ```bash
 $ chmod 777 solicitud.csr
 $ chown root:ssl-cert apache2.key.pem 
 $ chmod 640 apache2.key.pem
-    SSLCertificateFile /etc/apache2/llaves/certificadoapache2.crt
-    SSLCertificateKeyFile /etc/apache2/llaves/apache2.key.pem
+$ mv solicitud.csr /etc/ssl/certs/
+$ mv apache2.key.pem /etc/ssl/private
+    SSLCertificateFile /etc/ssl/certs/certificadoapache.cert
+    SSLCertificateKeyFile /etc/ssl/privateapache2.key.pem
 ```
 
-- Reiniciamos apache, activamos el módulo ssl y vemos si todo funciona a la perfección
+- Reiniciamos apache, activamos los módulos ssl y vemos si todo funciona a la perfección
 
 ```bash
 $ systemctl restart apache2
@@ -78,6 +81,49 @@ $ sudo a2enmod ssl
   Considering dependency socache_shmcb for ssl:
   Enabling module socache_shmcb.
   Enabling module ssl.
+$ a2enmod headers
+$ a2ensite default-ssl
 ```
 
 ## Comprobación
+
+- Hacemos un curl -k -v para saber que hay, y ver todo lo que hemos creado en el certificado:
+
+```bash
+$ curl -k -v https://localhost
+  *   Trying 127.0.0.1:443...
+  * Connected to localhost (127.0.0.1) port 443 (#0)
+  * ALPN, offering h2
+  * ALPN, offering http/1.1
+  * TLSv1.0 (OUT), TLS header, Certificate Status (22):
+  * TLSv1.3 (OUT), TLS handshake, Client hello (1):
+  * TLSv1.2 (IN), TLS header, Certificate Status (22):
+  * TLSv1.3 (IN), TLS handshake, Server hello (2):
+  * TLSv1.2 (IN), TLS header, Finished (20):
+  * TLSv1.2 (IN), TLS header, Supplemental data (23):
+  * TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+  * TLSv1.2 (IN), TLS header, Supplemental data (23):
+  * TLSv1.3 (IN), TLS handshake, Certificate (11):
+  * TLSv1.2 (IN), TLS header, Supplemental data (23):
+  * TLSv1.3 (IN), TLS handshake, CERT verify (15):
+  * TLSv1.2 (IN), TLS header, Supplemental data (23):
+  * TLSv1.3 (IN), TLS handshake, Finished (20):
+  * TLSv1.2 (OUT), TLS header, Finished (20):
+  * TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+  * TLSv1.2 (OUT), TLS header, Supplemental data (23):
+  * TLSv1.3 (OUT), TLS handshake, Finished (20):
+  * SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+  * ALPN, server accepted to use http/1.1
+  * Server certificate:
+  *  subject: C=ES; ST=Spain; L=Valencia; O=Danieel; OU=DN; CN=Daniel; emailAddress=daniel@daniel.com # El certificado creado
+  *  start date: Oct 30 11:44:31 2023 GMT
+  *  expire date: Oct 29 11:44:31 2024 GMT
+  *  issuer: C=ES; ST=Spain; L=Valencia; O=Danieel; OU=DN; CN=Daniel; emailAddress=daniel@daniel.com
+  *  SSL certificate verify result: self-signed certificate (18), continuing anyway.
+  * TLSv1.2 (OUT), TLS header, Supplemental data (23):
+  > GET / HTTP/1.1
+  > Host: localhost
+  > User-Agent: curl/7.81.0
+  > Accept: */*
+...output ommited...
+```

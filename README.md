@@ -17,7 +17,7 @@ Here are some ideas to get you started:
 ### [2. Práctica - Gestión de políticas de contraseñas](practica2.md)
 ### [3. Práctica - Configuración permisos ACL](practica3.md)
 ### [4. Práctica - Redundancia de discos](practica4.md)
-### [5. Práctica - ](practica5.md)
+### [5. Práctica - Certificado autofirmado para Apache](practica5.md)
 ### [6. Práctica - ](practica6.md)
 ### [7. Práctica - ](practica7.md)
 ### [8. Práctica - ](practica8.md)
