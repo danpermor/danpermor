@@ -88,31 +88,15 @@ $ a2ensite default-ssl
 ## Comprobación
 
 - Hacemos un curl -k -v para saber que hay, y ver todo lo que hemos creado en el certificado:
+  - k o --insecure: Para certificados SSL autofirmados
+  - -v : El verbose, muestra más las cosas 
 
 ```bash
 $ curl -k -v https://localhost
   *   Trying 127.0.0.1:443...
   * Connected to localhost (127.0.0.1) port 443 (#0)
-  * ALPN, offering h2
-  * ALPN, offering http/1.1
-  * TLSv1.0 (OUT), TLS header, Certificate Status (22):
-  * TLSv1.3 (OUT), TLS handshake, Client hello (1):
-  * TLSv1.2 (IN), TLS header, Certificate Status (22):
-  * TLSv1.3 (IN), TLS handshake, Server hello (2):
-  * TLSv1.2 (IN), TLS header, Finished (20):
-  * TLSv1.2 (IN), TLS header, Supplemental data (23):
-  * TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
-  * TLSv1.2 (IN), TLS header, Supplemental data (23):
-  * TLSv1.3 (IN), TLS handshake, Certificate (11):
-  * TLSv1.2 (IN), TLS header, Supplemental data (23):
-  * TLSv1.3 (IN), TLS handshake, CERT verify (15):
-  * TLSv1.2 (IN), TLS header, Supplemental data (23):
-  * TLSv1.3 (IN), TLS handshake, Finished (20):
-  * TLSv1.2 (OUT), TLS header, Finished (20):
-  * TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
-  * TLSv1.2 (OUT), TLS header, Supplemental data (23):
-  * TLSv1.3 (OUT), TLS handshake, Finished (20):
-  * SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+...output ommited...
+CM_SHA384
   * ALPN, server accepted to use http/1.1
   * Server certificate:
   *  subject: C=ES; ST=Spain; L=Valencia; O=Danieel; OU=DN; CN=Daniel; emailAddress=daniel@daniel.com # El certificado creado
