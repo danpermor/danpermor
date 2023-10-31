@@ -92,9 +92,9 @@ $ a2ensite default-ssl
   - -v : El verbose, muestra más las cosas 
 
 ```bash
-$ curl -k -v https://localhost
-  *   Trying 127.0.0.1:443...
-  * Connected to localhost (127.0.0.1) port 443 (#0)
+$ curl -k -v https://10.0.0.1
+  *   Trying 10.0.0.1:443...
+  * Connected to localhost (10.0.0.1) port 443 (#0)
 ...output ommited...
 CM_SHA384
   * ALPN, server accepted to use http/1.1
@@ -106,7 +106,7 @@ CM_SHA384
   *  SSL certificate verify result: self-signed certificate (18), continuing anyway.
   * TLSv1.2 (OUT), TLS header, Supplemental data (23):
   > GET / HTTP/1.1
-  > Host: localhost
+  > Host: 10.0.0.1
   > User-Agent: curl/7.81.0
   > Accept: */*
 ...output ommited...
