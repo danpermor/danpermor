@@ -65,8 +65,9 @@ $ chown root:ssl-cert apache2.key.pem
 $ chmod 640 apache2.key.pem
 $ mv solicitud.csr /etc/ssl/certs/
 $ mv apache2.key.pem /etc/ssl/private
-    SSLCertificateFile /etc/ssl/certs/certificadoapache.cert
-    SSLCertificateKeyFile /etc/ssl/privateapache2.key.pem
+$ vim /etc/apache2/sites-available/default-ssl.conf
+    SSLCertificateFile /etc/ssl/certs/certificadoapache.cert #linea nº1 a editar
+    SSLCertificateKeyFile /etc/ssl/privateapache2.key.pem #línea nº2 a editar
 ```
 
 - Reiniciamos apache, activamos los módulos ssl y vemos si todo funciona a la perfección
@@ -87,7 +88,7 @@ $ a2ensite default-ssl
 
 ## Comprobación
 
-- Hacemos un curl -k -v para saber que hay, y ver todo lo que hemos creado en el certificado:
+- Hacemos un curl -k -v para saber que hay, y ver todo lo que hemos creado en el certificado, lo probamos desde otra máquina cliente:
   - k o --insecure: Para certificados SSL autofirmados
   - -v : El verbose, muestra más las cosas 
 
