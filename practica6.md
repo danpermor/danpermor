@@ -236,7 +236,7 @@ $ curl -T prueba http://localhost/uploads/
 
 - Como vemos dice que es demasiado largo el archivo.
 
-### 14
+### 16
 
 - Vemos si funciona apache2 con los nuevos grupos accediendo a la web
 
