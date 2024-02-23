@@ -26,7 +26,7 @@ Here are some ideas to get you started:
 
 ### [6. Práctica - Hardening Apache](practica6.md)
 
-### [7. Práctica -](trabajofinal/)
+### [7. Práctica - Trabajo Final](trabajofinal/)
 
 ### [8. Práctica -](practica8.md)
 
