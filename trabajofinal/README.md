@@ -10,7 +10,7 @@
 		- Apache: 172.16.1.100/24
 
 - Tipología de red
-![[tipologia_red.png]]
+![[imgs/tipologia_red.png]]
 
 
 # Índice
