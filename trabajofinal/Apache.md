@@ -1,8 +1,11 @@
 - Primero instalamos apache
+
 ```bash
-$  sudo apt install apache2
+sudo apt install apache2
 ```
+
 - Creación apache sitio seguro, para eso vamos a habilitar y crear los certificados autofirmados, como el habilitar el ssl:
+
 ```bash
 
 $ vim /etc/apache2/sites-avaiable/default-ssl.conf
@@ -28,9 +31,10 @@ $ chown root:ssl-cert apachekey.key
 
 ```
 
-- Como meter la información? 
-	- Añadiremos los .md a /var/www/html/carpeta_que_queramos, añadir la información al directorio.
+- Como meter la información?
+ 	- Añadiremos los .md a /var/www/html/carpeta_que_queramos, añadir la información al directorio.
+
 ```
-$  mv carpeta_que_queramos /var/www/html/
-$ chown -R apacheuser:apachegroup /Var/www/html/carpeta_movida
+mv carpeta_que_queramos /var/www/html/
+chown -R apacheuser:apachegroup /Var/www/html/carpeta_movida
 ```

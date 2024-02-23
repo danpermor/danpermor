@@ -1,17 +1,24 @@
 1. Instalamos ldap slapd-utils
+
 ```bash
-$ apt install ldap slapd-utils
+apt install ldap slapd-utils
 ```
+
 2. Reconfiguramos ldap
+
 ```bash
-$ dpkg-reconfigure slapd
+dpkg-reconfigure slapd
 ```
+
 3. Pondremos en nuestro caso lo siguiente
-	- Contraseña: administrador
-	- dominio: admin.es
+
+- Contraseña: administrador
+- dominio: admin.es
+
 4. Instalamos lam
+
 ```bash
-$ apt install ldap-account manager
+apt install ldap-account manager
 ```
 
 5. Introducimos en el navegador: localhost/lam
@@ -20,14 +27,17 @@ $ apt install ldap-account manager
 8. Se nos abrirá un apartado que pongamos las credenciales de lam, la contraseña es **lam**
 9. Una vez dentro, en ajustes generales pondremos en sufijo de arbol, donde pone dc=yourdomain,dc=org, lo modificaremos como dc=admin,dc=es
 10. En tipos de cuenta,  modificaremos people y groups para que se asigne automáticamente la unidad organizativa.
-	- Cabe destacar, en lista de usuarios válidos pondremos cn=admin,dc=admin,dc=es
-11.  Finalmente,guardamos
+
+- Cabe destacar, en lista de usuarios válidos pondremos cn=admin,dc=admin,dc=es
+
+11. Finalmente,guardamos
 12. Creamos un grupo en el apartado grupo llamado Usuarios_sistema y invitad
 13. Entraremos y crearemos 4 usuarios en el apartado usuarios.
-	- marc:marc
-	- daniel:daniel
-	- carlos:carlos
-	- invitado:invitado -> Cuenta de invitado para navegar, a este habrá que decir que su grupo es invitado
+
+- marc:marc
+- daniel:daniel
+- carlos:carlos
+- invitado:invitado -> Cuenta de invitado para navegar, a este habrá que decir que su grupo es invitado
 
 - Cabe destacar que también se podría añadir usuarios en ldap de forma en comandos, se va a hacer una pequeña demostración para que cuente más en la nota final:
 
@@ -100,7 +110,7 @@ homeDirectory: /home/invitado
 - Y los añadiremos al ldap.
 
 ```bash
-$  ldapadd -x -H ldap:/// -b "dc=admin,dc=es" -D "cn=admin,dc=admin,dc=es" -w administrador -f base.lidf 
+ldapadd -x -H ldap:/// -b "dc=admin,dc=es" -D "cn=admin,dc=admin,dc=es" -w administrador -f base.lidf 
 ```
 
 - Con esto tendriamos ldap acabado

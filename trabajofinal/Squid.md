@@ -1,10 +1,12 @@
 - Instalar squid y copiar y pegar
+
 ```bash
 $  apt install squid
 $  cp /etc/squid/squid.conf /etc/squid/squid.conf.original
 $ rm /etc/squid/squid.conf
 ```
 - Añadimos que pida usuario y contraseña de ldap
+
 ```bash
 $  vim /etc/squid/squid.conf
 acl localnet src 0.0.0.1-0.255.255.255    # RFC 1122 "this" network (LAN)
@@ -65,6 +67,7 @@ http_port 172.16.82.22:8080 intercept
 - Esto hará que actúe de forma transparente todo lo que pase por en puerto 8080, no se deberá modificar nada más que eso, y en su caso se puede modificar para que se pueda accdeder a todo con http_access allow all.
 
 - Creamos el archivo domain_blacklist para bloquear sitios, bloquearemos tanto marca como minijuegos y instagram:
+
 ```bash
 $  cd /etc/squid
 $  vim domain_blacklist.txt

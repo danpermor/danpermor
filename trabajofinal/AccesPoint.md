@@ -2,6 +2,7 @@
 
 1. Instalaremos DD-WRT en nuestro Router, que hará de validador.
 2. Añadimos en freeradius un nuevo cliente, este será el router.
+
 ```bash
 $  vim /etc/freeradius/3.0/clients.conf
 
@@ -10,15 +11,19 @@ client freeradius-cliente{
         secret=router_radius
 $  systemctl restart freeradius
 ```
+
 3. Una vez en dd-wrt, vamos a services -> Freeradius/Radius
 4. Añadimos la configuración de radius
+
 ```txt
 Radius Auth Server Adress: 172.16.82.20
 Radius Auth Server Port: 1812
 Password Format: Shared Key
 Radius Auth Shared Secret: router_radius
 ```
+
 5. Finalmente vamos a wirless security y seleccionamos las siguientes opciones, esto puede variar en función del access point:
+
 ```bash
 Wirless Security
 
